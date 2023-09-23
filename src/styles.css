@@ -12,7 +12,6 @@
     padding: 10px;
     margin: 5px;
     border: 1px solid #999;
-    margin-top: 50px;
     width: 10px; /* Adjust the width as needed */
     position: relative; /* Add relative positioning for line placement */
 }
@@ -35,11 +34,7 @@
     border: 1px solid #999;
     width: 40px; /* Adjust the width as needed */
     position: relative; /* Add relative positioning for alignment */
-    bottom: 50px; /* Adjust the top position to align with the line */
-    left: 200px;
-    margin-left: 50px;
-    float: left; 
-
+    top: 7px; /* Adjust the top position to align with the line */
 }
 
 /* Add styling for buttons */

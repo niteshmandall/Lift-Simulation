@@ -1,7 +1,5 @@
-// Store the current position of each lift (initialized to 0)
-const liftPositions = [];
+// Store the current level of each lift (initialized to 1)
 const liftLevels = [];
-
 
 function createSimulation() {
     const numLevels = parseInt(document.getElementById("numLevels").value);
@@ -13,28 +11,28 @@ function createSimulation() {
     levelsContainer.innerHTML = "";
     liftsContainer.innerHTML = "";
 
+    // Initialize lift levels and positions
     for (let lift = 1; lift <= numLifts; lift++) {
         liftLevels.push(1); // Initialize lift levels to 1
     }
 
     // Create and display the levels
-    for (let level = numLevels; level >= 1; level--) {
+    for (let level = 1; level <= numLevels; level++) {
         const levelElement = document.createElement("div");
         levelElement.className = "level";
+        levelElement.textContent = `Level ${level}`;
 
         // Create green and red buttons for each level
         const greenButton = document.createElement("button");
         greenButton.textContent = "Green";
         greenButton.className = "button-green";
-        greenButton.onclick = () => moveLiftsUp(level); // Attach click event to the green button
-        console.log(level);
-        
+        greenButton.onclick = () => moveLiftsToLevel(level); // Attach click event to the green button
         levelElement.appendChild(greenButton);
 
         const redButton = document.createElement("button");
         redButton.textContent = "Red";
         redButton.className = "button-red";
-        redButton.onclick = () => moveLiftsDown(level); // Attach click event to the red button
+        redButton.onclick = () => moveLiftsToLevel(level); // Attach click event to the red button
         levelElement.appendChild(redButton);
 
         levelsContainer.appendChild(levelElement);
@@ -45,26 +43,7 @@ function createSimulation() {
         const liftElement = document.createElement("div");
         liftElement.className = "lift";
         liftElement.textContent = `Lift ${lift}`;
-        liftPositions.push(0); // Initialize lift positions
         liftsContainer.appendChild(liftElement);
-        console.log(liftElement);
-    }
-}
-
-function moveLiftsUp(level) {
-    moveLiftsToLevel(level);
-    // Move all lifts up (you can adjust the distance they move)
-    for (let i = 0; i < liftPositions.length; i++) {
-        liftPositions[i] -= 1; // Adjust the position (e.g., move up by 1)
-        document.querySelectorAll('.lift')[i].style.transform = `translateY(${liftPositions[i] * 97}px)`; // Adjust the lift position in pixels
-    }
-}
-
-function moveLiftsDown() {
-    // Move all lifts down (you can adjust the distance they move)
-    for (let i = 0; i < liftPositions.length; i++) {
-        liftPositions[i] += 1; // Adjust the position (e.g., move down by 1)
-        document.querySelectorAll('.lift')[i].style.transform = `translateY(${liftPositions[i] * 97}px)`; // Adjust the lift position in pixels
     }
 }
 
@@ -78,5 +57,10 @@ function moveLiftsToLevel(targetLevel) {
     const outputContainer = document.getElementById("outputContainer");
     outputContainer.textContent = `Lifts are now at Level ${targetLevel}`;
 
+    // Move the lifts to their respective levels
+    for (let i = 0; i < liftLevels.length; i++) {
+        const liftElement = document.querySelectorAll('.lift')[i];
+        const targetPosition = (targetLevel - 1) * 30; // Adjust the lift position in pixels
+        liftElement.style.transform = `translateY(${targetPosition}px)`;
+    }
 }
-
