@@ -14,6 +14,7 @@ function createSimulation() {
     // Initialize lift levels and positions
     for (let lift = 1; lift <= numLifts; lift++) {
         liftLevels.push(1); // Initialize lift levels to 1
+        // testing
     }
 
     // Create and display the levels
