@@ -12,7 +12,8 @@
     padding: 10px;
     margin: 5px;
     border: 1px solid #999;
-    margin-top: 50px;
+    margin-top: 100px;
+    top: 50px;
     width: 10px; /* Adjust the width as needed */
     position: relative; /* Add relative positioning for line placement */
 }
@@ -21,6 +22,7 @@
     content: "";
     position: absolute;
     bottom: 0;
+    top: 50px;
     left: 0;
     width: 2000%; /* Extend the line to the window width */
     height: 0.5px; /* Adjust the line thickness as needed */
@@ -28,18 +30,17 @@
 }
 
 .lift {
-    min-width: 10px; /* Set a minimum width for lifts */
+    min-width: 10px;
     background-color: #f2f2f2;
     padding: 10px;
     margin: 5px;
     border: 1px solid #999;
-    width: 40px; /* Adjust the width as needed */
-    position: relative; /* Add relative positioning for alignment */
-    bottom: 50px; /* Adjust the top position to align with the line */
+    width: 40px;
+    position: relative;
     left: 200px;
     margin-left: 50px;
-    float: left; 
-
+    float: left;
+    transition: top 2s ease; /* Add a transition for smooth movement */
 }
 
 /* Add styling for buttons */
@@ -58,4 +59,20 @@
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+
+.door {
+    min-width: 10px;
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #999;
+    width: 40px;
+    position: relative;
+    right: 380px;
+    bottom: 50px;
+    margin-left: 50px;
+    float: left;
+    transition: top 2s ease; /* Add a transition for smooth movement */
 }

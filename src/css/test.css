@@ -1,68 +1,56 @@
-/* Reset margin and padding for all elements */
-* {
-    margin: 0;
-    padding: 0;
+/* Add some basic styling for levels and lifts */
+.simulation-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); /* Use CSS grid */
+    gap: 10px;
+    align-items: flex-start; /* Align the items to the top of the container */
 }
 
-/* Floor CSS */
-.container {
-    width: 60%;
-    height: auto;
-    margin: 0 auto 20px auto;
-}
-
-.floor {
-    display: flex;
-    flex-direction: row;
-    height: 123px;
-    border-bottom: 3px solid black;
-    padding-top: 10px;
-}
-
-/* Lift CSS */
-.lift {
-    padding: 2px;
-    height: 70px;
-    width: 60px;
-    margin: 3px;
-    transform: translateY(0px);
-    background-color: #00A2FF;
-}
-
-.lift.ended {
-    opacity: 0;
-}
-
-.lift-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-around;
-    position: relative;
-}
-
-/* Button CSS */
-button {
-    border: none;
-    border-radius: 10px;
+.level {
+    min-width: 110px; /* Set a minimum width for levels */
+    background-color: #ccc;
     padding: 10px;
     margin: 5px;
-    min-height: 30px;
-    min-width: 80px;
+    border: 1px solid #999;
+    width: 10px; /* Adjust the width as needed */
+    position: relative; /* Add relative positioning for line placement */
 }
 
-.up-btn {
-    background-color: #01B202;
+.level::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Extend the line to the window width */
+    height: 2px; /* Adjust the line thickness as needed */
+    background-color: #ff0000; /* Line color */
 }
 
-.down-btn {
-    background-color: #F8BA00;
-}
-
-.btn-container {
+.lift {
+    min-width: 10px; /* Set a minimum width for lifts */
+    background-color: #f2f2f2;
     padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin: 5px;
+    border: 1px solid #999;
+    width: 40px; /* Adjust the width as needed */
+    position: relative; /* Add relative positioning for alignment */
+    transition: transform 0.3s ease; /* Add transition for smooth animation */
+}
+
+/* Add styling for buttons */
+.button-green {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.button-red {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
