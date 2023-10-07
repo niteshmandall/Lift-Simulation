@@ -4,6 +4,8 @@ const liftLevels = [];
 let count = 1;
 let val;
 
+
+
 function createSimulation() {
     const numLevels = parseInt(document.getElementById("numLevels").value);
     const numLifts = parseInt(document.getElementById("numLifts").value);
@@ -27,7 +29,7 @@ function createSimulation() {
 
         // Create green and red buttons for each level
         const greenButton = document.createElement("button");
-        greenButton.textContent = "Green";
+        greenButton.textContent = "Up";
         greenButton.className = "button-green";
         greenButton.onclick = () => moveLifts("up", level); // Attach click event to the green button
         console.log(level);
@@ -35,7 +37,7 @@ function createSimulation() {
         // levelElement.appendChild(greenButton);
 
         const redButton = document.createElement("button");
-        redButton.textContent = "Red";
+        redButton.textContent = "Down";
         redButton.className = "button-red";
         redButton.onclick = () => moveLifts("down",level); // Attach click event to the red button
         // levelElement.appendChild(redButton);
@@ -53,70 +55,42 @@ function createSimulation() {
         }
     }
 
-    // Create and display the lifts
+    // Create and display the lifts with doors and element2
     for (let lift = 1; lift <= numLifts; lift++) {
         const liftElement = document.createElement("div");
         liftElement.className = "lift";
-        liftElement.textContent = `Lift ${lift}`;
-        liftPositions.push(0); // Initialize lift positions
+        // liftElement.textContent = `Lift ${lift}`;
+        liftPositions.push(0);
         liftsContainer.appendChild(liftElement);
         console.log(liftElement);
-    }
 
-    for (let lift = 1; lift <= numLifts; lift++) {
-        const liftElement = document.createElement("div");
-        liftElement.className = "door";
-        liftElement.textContent = `Gift ${lift}`;
-        doorsContainer.appendChild(liftElement);
-        console.log(liftElement);
     }
+    
 }
+
+
 
 const maxHeight = 5;
 const minHeight = 0; 
 
-// function moveLiftsUp(level) {
-//     // Calculate the difference between the clicked level and the current level
-//     const levelDifference = level - count;
-
-//     // Check if the lift is within the allowed range
-//     if (count + levelDifference <= maxHeight) {
-//         // Update count with the current level
-//         count += levelDifference;
-
-//         // Move all lifts up by the calculated level difference
-//         for (let i = 0; i < liftPositions.length; i++) {
-//             liftPositions[i] -= levelDifference; // Adjust the position
-//             document.querySelectorAll('.lift')[i].style.transform = `translateY(${liftPositions[i] * 97}px)`; // Adjust the lift position in pixels
-//         }
-//     } else {
-//         console.log('Lift cannot go higher than the maximum allowed height.');
-//     }
-// }
-
-// function moveLiftsDown(level) {
-//     // Calculate the difference between the clicked level and the current level
-//     const levelDifference = count - level;
-
-//     // Check if the lift is within the allowed range
-//     if (count - levelDifference >= minHeight) {
-//         // Update count with the current level
-//         count -= levelDifference;
-
-//         // Move all lifts down by the calculated level difference
-//         for (let i = 0; i < liftPositions.length; i++) {
-//             liftPositions[i] += levelDifference; // Adjust the position
-//             document.querySelectorAll('.lift')[i].style.transform = `translateY(${liftPositions[i] * 97}px)`; // Adjust the lift position in pixels
-//         }
-//     } else {
-//         console.log('Lift cannot go lower than the minimum allowed height.');
-//     }
-// }
-
 function moveLifts(direction, level) {
+
+    const windowWidth = window.innerWidth;
+console.log(`Browser window width: ${windowWidth}px`);
+
+    setTimeout(() => {
+        liftElements[0].classList.remove('animate');
+        liftElements[0].classList.remove('door-close');
+
+        console.log(levelDifference, openTime);
+
+    }, 1);
+
     // Calculate the difference between the clicked level and the current level
     const levelDifference = direction === 'up' ? level - count : count - level;
     const animationDuration = `${Math.abs(levelDifference) * 2}s`;
+    const openTime = Math.abs(levelDifference) * 2;
+
 
     // Check if the lift is within the allowed range
     if (direction === 'up' && count + levelDifference <= maxHeight) {
@@ -137,14 +111,28 @@ function moveLifts(direction, level) {
 
     // Update the lift positions and their doors in the DOM
     const liftElements = document.querySelectorAll('.lift');
-    const doorElements = document.querySelectorAll('.door');
     
     for (let i = 0; i < liftPositions.length; i++) {
         const newPosition = liftPositions[i] * 147.5;
-        liftElements[0].style.top = `${newPosition}px`; // Adjust the lift position in pixels
-        doorElements[0].style.top = `${newPosition}px`; // Adjust the door position in pixels0
+        console.log(newPosition);
+        console.log(liftPositions[i] );
+        liftElements[0].style.top = `${newPosition - 80}px`; // Adjust the lift position in pixels
+
+        setTimeout(() => {
+            liftElements[0].classList.add('animate');
+            console.log("test", animationDuration);
+            console.log("door-open");
+
+            setTimeout(() => {
+                liftElements[0].classList.add('door-close');
+                console.log(levelDifference, openTime);
+                console.log("door-close");
+            }, 2500);
+
+        }, (openTime * 1000) + 1500);
+
+        
         liftElements[0].style.transitionDuration = animationDuration;
-        doorElements[0].style.transitionDuration = animationDuration; // Set the animation duration
     }
 }
 

@@ -8,10 +8,10 @@
 
 .level {
     min-width: 110px; /* Set a minimum width for levels */
-    background-color: #ccc;
+    background-color: #ebff0a;
     padding: 10px;
     margin: 5px;
-    border: 1px solid #999;
+    border: 1px solid #000000;
     margin-top: 100px;
     top: 50px;
     width: 10px; /* Adjust the width as needed */
@@ -24,23 +24,26 @@
     bottom: 0;
     top: 50px;
     left: 0;
-    width: 2000%; /* Extend the line to the window width */
+    width: 100vw; /* Extend the line to the window width */
     height: 0.5px; /* Adjust the line thickness as needed */
     background-color: #ff0000; /* Line color */
 }
 
 .lift {
+    height: 100px;
+    bottom: 80px;
     min-width: 10px;
-    background-color: #f2f2f2;
+    background-color: hsl(198, 100%, 65%);
     padding: 10px;
     margin: 5px;
-    border: 1px solid #999;
+    border: 1px solid #000000;
     width: 40px;
     position: relative;
     left: 200px;
     margin-left: 50px;
     float: left;
     transition: top 2s ease; /* Add a transition for smooth movement */
+
 }
 
 /* Add styling for buttons */
@@ -62,17 +65,45 @@
 }
 
 
-.door {
-    min-width: 10px;
-    background-color: #f2f2f2;
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #999;
-    width: 40px;
-    position: relative;
-    right: 380px;
-    bottom: 50px;
-    margin-left: 50px;
-    float: left;
-    transition: top 2s ease; /* Add a transition for smooth movement */
+
+
+.animate {
+
+    animation-name: door-open;
+    animation-duration:  1s;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+.door-close {
+
+    animation-name: door-close;
+    animation-duration:  1s;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes door-open {
+    0%{
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    100% {
+        transform: scaleX(2);
+        transform-origin: left;
+    }
+}
+
+
+@keyframes door-close {
+    0%{
+        transform: scaleX(2);
+        transform-origin: left;
+    }
+
+    100% {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
 }
